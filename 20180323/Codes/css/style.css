@@ -529,6 +529,59 @@ a {
     background-image: url(../img/bg_04.jpg);
 }
 
+.tip_theme_2 .xk-title-box .xk-tit {
+    width: 326px;
+}
+
+.xk-tenet-list {
+    margin-top: 190px;
+}
+
+.xk-tenet-list .xk-tenet-tit {
+    color: #0db4e0;
+    font-size: 20px;
+    font-weight: 600;
+    float: left;
+}
+
+.xk-tenet-list li {
+    width: 46%;
+    margin-right: 55px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.xk-tenet-list li:nth-child(even) {
+    margin-right: 0;
+}
+
+.xk-tenet-list li a {
+    width: 76px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    background-color: white;
+    color: #ff4a33;
+}
+
+.xk-tenet-list li .show {
+    background-color: #f1fcff;
+}
+
+.xk-tenet-list .tenet_det {
+    width: 446px;
+    padding: 17px 5px;
+    margin-top: 35px;
+    background-color: #f1fcff;
+}
+
+.xk-tenet-list .tenet_det p {
+    width: 427px;
+    color: #9f9f9f;
+    font-size: 16px;
+    margin: 0 auto;
+}
+
 
 /*主题分栏2结束*/
 
