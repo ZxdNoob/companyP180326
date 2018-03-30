@@ -24,7 +24,7 @@ var isShow = function(btn, showContainer, openMouseEvent, openHidden, bgColor1, 
                     this.style.backgroundColor = bgColor1;
                     showContainer[this.index].style.display = "none"; //隐藏
                     if (isOne) {
-                        boxHeightChange(tntList, tntListHeight, tipThemeTwoH, tipThemeTwoH);
+                        boxHeightChange(tntList, tntListHeight, tipThemeTwo, tipThemeTwoH);
                     } else {
                         boxHeightChange(attList, attListHeight, tipThemeThree, tipThemeTH);
                     }
@@ -34,7 +34,7 @@ var isShow = function(btn, showContainer, openMouseEvent, openHidden, bgColor1, 
                     this.style.backgroundColor = bgColor2;
                     showContainer[this.index].style.display = "block"; //显示
                     if (isOne) {
-                        boxHeightChange(tntList, tntListHeight, tipThemeTwoH, tipThemeTwoH);
+                        boxHeightChange(tntList, tntListHeight, tipThemeTwo, tipThemeTwoH);
                     } else {
                         boxHeightChange(attList, attListHeight, tipThemeThree, tipThemeTH);
                     }
@@ -59,28 +59,6 @@ var isShow = function(btn, showContainer, openMouseEvent, openHidden, bgColor1, 
 
 };
 
-
-//封装给当前状态添加相应类名的方法
-var setActive = function(obj, add) {
-    var initClass = initClass;
-    var nullStr = " ";
-    obj.className = obj.className + nullStr + add;
-    var aClass = obj.className.split(" "); //将类名放入数组中
-
-    //数组去重
-
-    var newClass = []; //一个新的临时数组
-    //遍历当前数组 
-    for (var i = 0; i < aClass.length; i++) {
-        //如果当前数组的第i已经保存进了临时数组，那么跳过， 
-        //否则把当前项push到临时数组里面 
-        if (newClass.indexOf(aClass[i]) == -1) {
-            newClass.push(aClass[i]);
-        }
-    }
-    theClass = newClass.join(" ") + " ";
-    obj.className = theClass;
-};
 
 //封装视情况改变“收起/详细”按钮的高度，让它的背景与展示内容容器的背景相连的方法
 var changeTargetAHeight = function(targetH, theSize) {
@@ -136,22 +114,41 @@ changeTargetAHeight(tenetH, 19, false);
 var attH = $.byClassName("xk-att-tit"); //获取特别提醒展示内容的标题标签
 changeTargetAHeight(attH, 36, true);
 
+
+//给当前点击过的侧边导航条添加当前状态的样式
+var aNavBtn = $.byClassName("xk_nav_link");
+
+for (var i = 0, bLen = aNavBtn.length; i < bLen; i++) {
+    aNavBtn[i].onclick = function() {
+        for (var j = 0; j < bLen; j++) {
+            aNavBtn[j].classList.remove("active"); //先将所有按钮的"active"类名去除
+        }
+        this.classList.add("active"); //独给当前点击的按钮添加"active"类名
+    };
+}
+
 //回到顶部
 var backTopBtn = $.byClassName("back_top")[0];
 backTopBtn.onclick = backTop;
 
-// //给当前点击过的侧边导航条添加当前状态的样式
-// var aNavBtn = $.byClassName("xk_nav_link");
-// for (var i = 0, bLen = aNavBtn.length; i < bLen; i++) {
-//     aNavBtn[i].onclick = function() {
-//         setActive(this, "active");
-//     };
-// }
+//窗口宽度小于1700px时将固定导航条隐藏起来
+var navBar = $.byClassName("nav_list")[0];
+onresize = function() {
+    if (this.innerWidth < 1700) {
+        navBar.style.display = "none";
+    } else {
+        navBar.style.display = "block";
+    }
+};
+
+
+//“数据安全十大原则”分栏列表容器
 var tntList = $.byClassName("xk-tenet-list")[0];
 var tntListHeight = tntList.offsetHeight;
 var tipThemeTwo = $.byClassName("tip_theme_2")[0];
 var tipThemeTwoH = tipThemeTwo.offsetHeight;
 
+//“特别提醒”分栏列表容器
 var attList = $.byClassName("att_list")[0];
 var attListHeight = attList.offsetHeight;
 var tipThemeThree = $.byClassName("tip_theme_3")[0];
